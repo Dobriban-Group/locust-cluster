@@ -37,7 +37,7 @@ Host locust-node*
   ControlPath ~/.ssh/cm/%C.compute.sock
   ProxyJump locust-login.seas.upenn.edu
 ```
-Then in VSCode just connect to locust-node9 as the host, and it will forward you to node9.
+Then in VSCode just connect to locust-node9 as the host, and it will forward you to node9. Note that you can't access node9 until you start a job on that node!
 
 ## Running (embarassingly) parallel jobs
 
