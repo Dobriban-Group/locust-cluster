@@ -41,10 +41,11 @@ Then in VSCode just connect to locust-node9 as the host, and it will forward you
 
 ## Running (embarassingly) parallel jobs
 
-`sbatch` :
+`sbatch` : runs an array job, meaning its arguments are run in parallel and are identical except that they're each given an array index. Usually this index is either not used (jobs are identical, or perhaps just have different random initializations) or used to index a parameter list/grid so that each job runs the same function with different arguments. 
+
 `Dask` :
 
 ### Using GPU
 Varies depending on what program you're using. E.g. JAX will automatically detect available devices, PyTorch requires you to specify that you're using `cuda`, etc.
-Basically though, if you're only doing small development work you can allocate 1 or 2 GPU to your VS Code session. Be careful though, as this reserves the resource and blocks other from using it. So DO NOT request a bunch of GPU and then leave your session idle. 
+Basically though, if you're only doing small development work you can allocate 1 or 2 GPU to your VS Code session. Be careful though, as this reserves the resource and blocks other from using it. So DO NOT request a bunch of GPU and then leave your session idle (unless you are sure nobody else needs the resources). 
 If you're running a long job you should really submit it with `srun` (for a script with a single process) or `sbatch` (for an array job)
