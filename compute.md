@@ -16,6 +16,8 @@ A more complete request:
 Which allocates 20GB of RAM and 1 GPU machine for your session for 10 hours and 30 min. There are lots more options.
 Right now we only have node9 available, but in general you can check where the job has been allocated with `squeue`.
 
+Also check out [this script](/scripts/tally.sh) which you can run on the cluster to see a nicely formatted list of jobs that *also* includes GPU resources. 
+
 ### Connecting with VSCode/Cursor
 Locust admin don't want us to use Remote - Tunnels, but apparently SSH is fine. Here's an example `~/.ssh/config`:
 ```
@@ -41,9 +43,13 @@ Then in VSCode just connect to locust-node9 as the host, and it will forward you
 
 ## Running (embarassingly) parallel jobs
 
-`sbatch` : runs an array job, meaning its arguments are run in parallel and are identical except that they're each given an array index. Usually this index is either not used (jobs are identical, or perhaps just have different random initializations) or used to index a parameter list/grid so that each job runs the same function with different arguments. 
+`sbatch` : runs an array job, meaning its arguments are run in parallel and are identical except that they're each given an array index. Usually this index is either not used (jobs are identical, or perhaps just have different random initializations) or used to index a parameter list/grid so that each job runs the same function with different arguments.
+*TODO: Add sbatch bash script template* 
 
-`Dask` :
+`Dask` : A python library that let's you schedule jobs interactively in Python (it works in ipython notebooks). 
+There are plenty of subtle advantages of working natively in Python inside of your current environment/session, but probably the biggest perk of the framework is that Dask provides a super nice dashboard for monitoring jobs.
+Check out the [docs](https://docs.dask.org/en/stable/) and more specifically the reference for scheduling via [SLURM](https://jobqueue.dask.org/en/latest/generated/dask_jobqueue.SLURMCluster.html#dask_jobqueue.SLURMCluster). 
+*TODO: Add sample script / ipython notebook*
 
 ### Using GPU
 Varies depending on what program you're using. E.g. JAX will automatically detect available devices, PyTorch requires you to specify that you're using `cuda`, etc.
